@@ -16,7 +16,19 @@
 	rest -> - term rest
 	rest -> e (empty)
 	term -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-	
+
+	We assume that the user will input an expression. Our job
+	is to a) decide if the user input is a correct expression
+	and b) print the corresponding postfix translation of that
+	expression.
+
+	A recursive descent parser defines a procedure for each
+	nonterminal in our grammar. So we have functions expr,
+	rest, and term as per the grammar above. Then, for each
+	production, we call the appropriate nonterminal procedure.
+	We finally use a function called match that gives us the
+	next token in our stream. In doing it this way, our parser
+	never has to backtrack.
 */
 
 #include <stdio.h>
