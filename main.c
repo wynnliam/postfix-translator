@@ -71,6 +71,7 @@ int lexan() {
 			line_num += 1;
 			return NONE;
 		}
+
 		else if(isdigit(t)) {
 			tokenval = t - '0'; // Gives numeric value of t
 			t = getchar();
