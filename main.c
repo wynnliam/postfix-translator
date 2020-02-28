@@ -52,7 +52,7 @@ void term();
 void error(const char* message);
 
 int main() {
-	lookahead = getchar();
+	lookahead = lexan();
 	expr();
 	putchar('\n');
 	return 0;
@@ -67,8 +67,10 @@ int lexan() {
 		// Whitespace: just ignore it
 		if(t == ' ' || t == '\t')
 			;
-		else if(t == '\n')
+		else if(t == '\n') {
 			line_num += 1;
+			return NONE;
+		}
 		else if(isdigit(t)) {
 			tokenval = t - '0'; // Gives numeric value of t
 			t = getchar();
@@ -92,25 +94,25 @@ int lexan() {
 
 void match(const int token) {
 	if(lookahead == token)
-		lookahead = getchar();
+		lookahead = lexan();
 	else
 		error("Bad token");
 }
 
 void expr() {
-	term();
+	factor();
 	rest();
 }
 
 void rest() {
 	if(lookahead == '+') {
 		match('+');
-		term();
+		factor();
 		putchar('+');
 		rest();
 	} else if(lookahead == '-') {
 		match('-');
-		term();
+		factor();
 		putchar('-');
 		rest();
 	}
