@@ -11,10 +11,11 @@
 
 	The grammar for expressions we parse is:
 
-	expr -> term rest
-	rest -> + term rest
-	rest -> - term rest
-	rest -> e (empty)
+	expr -> factor rest
+	rest -> + factor rest
+	rest -> - factor rest
+	rest -> e - meaning empty
+	factor -> ( expr ) | num
 	term -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 	We assume that the user will input an expression. Our job
@@ -34,6 +35,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+
+#define NUM 256
 
 int lookahead;
 
