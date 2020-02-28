@@ -16,7 +16,6 @@
 	rest -> - factor rest
 	rest -> e - meaning empty
 	factor -> ( expr ) | num
-	term -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 	We assume that the user will input an expression. Our job
 	is to a) decide if the user input is a correct expression
@@ -39,10 +38,13 @@
 #define NUM 256
 
 int lookahead;
+// The number value of the current token
+int tokenval;
 
 void match(const int token);
 void expr();
 void rest();
+void factor();
 void term();
 void error(const char* message);
 
@@ -77,6 +79,17 @@ void rest() {
 		putchar('-');
 		rest();
 	}
+}
+
+void factor() {
+	if(lookahead == '(') {
+		match('(');
+		expr();
+		match(')');
+	} else if(lookahead == NUM) {
+		printf(" %d ", tokenval);
+		match(NUM);
+	} else error("Bad factor");
 }
 
 void term() {
