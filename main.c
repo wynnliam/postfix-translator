@@ -35,12 +35,15 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define NUM 256
+#define NONE	-1
+#define NUM 	256
 
 int lookahead;
 // The number value of the current token
-int tokenval;
+int tokenval = NONE;
+int line_num = 1;
 
+int lexan();
 void match(const int token);
 void expr();
 void rest();
@@ -53,6 +56,38 @@ int main() {
 	expr();
 	putchar('\n');
 	return 0;
+}
+
+int lexan() {
+	int t;
+
+	while(1) {
+		t = getchar();
+
+		// Whitespace: just ignore it
+		if(t == ' ' || t == '\t')
+			;
+		else if(t == '\n')
+			line_num += 1;
+		else if(isdigit(t)) {
+			tokenval = t - '0'; // Gives numeric value of t
+			t = getchar();
+			while(isdigit(t)) {
+				// Adding a new digit means increasing token by a factor of 10
+				tokenval = tokenval * 10 + t - '0';
+				t = getchar();
+			}
+
+			// If isdigit(t) == false, we've gone too far, so put t back
+			ungetc(t, stdin);
+			return NUM;
+		}
+
+		else {
+			tokenval = NONE;
+			return t;
+		}
+	}
 }
 
 void match(const int token) {
