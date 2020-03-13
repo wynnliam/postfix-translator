@@ -100,6 +100,24 @@
 #define ID		259
 #define DONE	260
 
+// The symbol table holds every id the program sees:
+// "mod", "div", and all id's that start with an alphabet
+// character.
+
+// The symbol table is implemented in two parts:
+// First there is the array of symbols (the symbol_table),
+// and a single character array that holds every id lexeme.
+struct sym_entry {
+	// Points to the first character in a string within
+	// lexemes
+	char* lexptr;
+	// The token value for this entry.
+	int token_val;
+};
+
+struct sym_entry symbol_table[100];
+char lexemes[999];
+
 // The key to predictive parsing. We use this to choose
 // what production rule to follow given the one we are already
 // at. Given how our grammar is structured, we can use this
