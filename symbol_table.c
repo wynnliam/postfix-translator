@@ -36,5 +36,21 @@ int lookup(char* lexeme) {
 }
 
 int insert(char* lexeme, int token_val) {
-	return 0;
+	int lexeme_len = strlen(lexeme);
+
+	if(last_entry + 1 >= SYMMAX)
+		error("symbol table full");
+	if(last_char + lexeme_len + 1 >= STRMAX)
+		error("lexems array full");
+
+	++last_entry;
+
+	symbol_table[last_entry].token_val = token_val;
+	symbol_table[last_entry].lexptr = &lexemes[last_char + 1];
+
+	last_char += lexeme_len + 1;
+
+	strcpy(symbol_table[last_entry].lexptr, lexeme);
+
+	return last_entry;
 }

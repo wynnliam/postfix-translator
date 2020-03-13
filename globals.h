@@ -65,3 +65,4 @@ int lookahead;
 // occurs, we can at least point out the line that is
 // the offender.
 extern int line_num;
+extern void error(const char* message);
