@@ -91,9 +91,18 @@
 #define NONE	-1
 #define NUM 	256
 
+// The key to predictive parsing. We use this to choose
+// what production rule to follow given the one we are already
+// at. Given how our grammar is structured, we can use this
+// to always correctly choose the next production rule.
 int lookahead;
-// The number value of the current token
+// The number value of the current token. For
+// a token we read in, this tells us the type in a way
+// the system can easily understand.
 int tokenval = NONE;
+// Use this for primitive error checking. When a problem
+// occurs, we can at least point out the line that is
+// the offender.
 int line_num = 1;
 
 int lexan();
