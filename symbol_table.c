@@ -25,6 +25,10 @@ int last_char = -1;
 // Last used position in the symbol table.
 int last_entry = 0;
 
-int lookup(char* s) {
+int lookup(char* lexeme) {
+	return 0;
+}
+
+int insert(char* lexeme, int token_val) {
 	return 0;
 }
