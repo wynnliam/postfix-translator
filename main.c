@@ -89,6 +89,10 @@
 int line_num = 1;
 int tokenval = NONE;
 
+// Symbol table functions we use
+extern int lookup(char* lexeme);
+extern int insert(char* lexeme, int token_val);
+
 int lexan();
 void match(const int token);
 void expr();
@@ -98,6 +102,9 @@ void term();
 void error(const char* message);
 
 int main() {
+	insert("div", DIV);
+	insert("mod", MOD);
+
 	lookahead = lexan();
 	expr();
 	putchar('\n');
