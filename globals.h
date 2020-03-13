@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+/* TOKEN VALUE DEFINITIONS */
+
 // Possible values for tokenval. We choose
 // values that a char cannot have with the exception
 // of EOS, which in ASCII is 0 and universally means 
@@ -20,6 +22,14 @@
 #define MOD		258
 #define ID		259
 #define DONE	260
+
+// The number value of the current token. For
+// a token we read in, this tells us the type in a way
+// the system can easily understand.
+int tokenval = NONE;
+
+
+/* SYMBOL TABLE DEFINITIONS */
 
 // The symbol table holds every id the program sees:
 // "mod", "div", and all id's that start with an alphabet
@@ -36,18 +46,25 @@ struct sym_entry {
 	int token_val;
 };
 
-struct sym_entry symbol_table[100];
-char lexemes[999];
+// Specifies the number the size of the lexeme array
+#define STRMAX	999
+// Specifies the size of the symbol table array.
+#define SYMMAX	100
+
+struct sym_entry symbol_table[SYMMAX];
+char lexemes[STRMAX];
+
+
+/* LEXER DEFINITIONS */
 
 // The key to predictive parsing. We use this to choose
 // what production rule to follow given the one we are already
 // at. Given how our grammar is structured, we can use this
 // to always correctly choose the next production rule.
 int lookahead;
-// The number value of the current token. For
-// a token we read in, this tells us the type in a way
-// the system can easily understand.
-int tokenval = NONE;
+
+
+/* ERROR HANDLING DEFITIONS */
 // Use this for primitive error checking. When a problem
 // occurs, we can at least point out the line that is
 // the offender.
