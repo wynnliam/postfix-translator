@@ -88,8 +88,17 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+// Possible values for tokenval. We choose
+// values that a char cannot have with the exception
+// of EOS, which in ASCII is 0 and universally means 
+// "end of string".
 #define NONE	-1
+#define EOS		0
 #define NUM 	256
+#define DIV		257
+#define MOD		258
+#define ID		259
+#define DONE	260
 
 // The key to predictive parsing. We use this to choose
 // what production rule to follow given the one we are already
