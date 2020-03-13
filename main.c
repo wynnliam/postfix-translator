@@ -3,7 +3,7 @@
 /*
 	Working example from Compilers: Principles, Techniques, and Tools.
 
-	This is an example of a recursive descent parser for implementing
+	This is an example of a predictive parser for implementing
 	a postfix translator.
 
 	For example, given 9-5+2
@@ -36,13 +36,52 @@
 	and b) print the corresponding postfix translation of that
 	expression.
 
-	A recursive descent parser defines a procedure for each
-	nonterminal in our grammar. So we have functions expr,
-	rest, and term as per the grammar above. Then, for each
-	production, we call the appropriate nonterminal procedure.
-	We finally use a function called match that gives us the
-	next token in our stream. In doing it this way, our parser
-	never has to backtrack.
+	We will implement our translator using predictive parsing.
+	To understand what that is, we must first learn what is called
+	"recusrive descent parsing".
+
+	Recursive descent parsing is a top down method for syntax analysis
+	where in each production rule has a corresponding procedure to handle
+	it. For example, "expr -> term moreterms" would be handled by writing
+	a procedure called "expr()" that would eventually call "term()" and
+	"moreterms()". So our syntax analysis starts with the "start()" procedure,
+	and descends down to parse (hence the "descent parsing" in the name). The
+	"recusrive" part comes from the fact that production rules indirectly
+	resolve to themselves, hence the "recursive" part in the name.
+
+	So how do we implement recursive descent parsing? We use "predictive
+	parsing". Essentially, predictive parsing uses a lookahead symbol to determine
+	what production to take. The lookahead symbol unambiguously decides the
+	production to take *without having to backtrack*! Thats incredibly powerful.
+	However, we have some rules for our grammar to make this work: 1. Production
+	rules must not be ambiguous and 2. no left recursion.
+
+	When I say "production rules mus not be ambigious", I mean that two derivations
+	for a nonterminal must be disjoint. For example, suppose I had the rule:
+
+	expr -> id A | id B
+	A -> ...
+	B -> ...
+
+	The predictive parser would not be able to handle this situation. The lookahead
+	token would read id, and then which one would it pick?
+
+	Second, we cannot have left recursion in our grammar. Why is this a problem?
+	consider the rule:
+
+	A -> A + B
+
+	The corresponding code might me:
+
+	A_expr() {
+		A_expr();
+		match('+');
+		B_expr();
+	}
+
+	You would get an infinite loop!
+
+	As such, we remove these problems from our grammar.
 */
 
 #include <stdio.h>
