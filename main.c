@@ -86,6 +86,9 @@
 
 #include "./globals.h"
 
+int line_num = 1;
+int tokenval = NONE;
+
 int lexan();
 void match(const int token);
 void expr();

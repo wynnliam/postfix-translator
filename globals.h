@@ -26,7 +26,7 @@
 // The number value of the current token. For
 // a token we read in, this tells us the type in a way
 // the system can easily understand.
-int tokenval = NONE;
+extern int tokenval;
 
 
 /* SYMBOL TABLE DEFINITIONS */
@@ -46,13 +46,8 @@ struct sym_entry {
 	int token_val;
 };
 
-// Specifies the number the size of the lexeme array
-#define STRMAX	999
-// Specifies the size of the symbol table array.
-#define SYMMAX	100
 
-struct sym_entry symbol_table[SYMMAX];
-char lexemes[STRMAX];
+extern struct sym_entry symbol_table[];
 
 
 /* LEXER DEFINITIONS */
@@ -68,4 +63,4 @@ int lookahead;
 // Use this for primitive error checking. When a problem
 // occurs, we can at least point out the line that is
 // the offender.
-int line_num = 1;
+extern int line_num;
