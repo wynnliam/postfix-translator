@@ -104,6 +104,7 @@ void error(const char* message);
 int main() {
 	insert("div", DIV);
 	insert("mod", MOD);
+	insert(0, 0);
 
 	lookahead = lexan();
 	expr();
