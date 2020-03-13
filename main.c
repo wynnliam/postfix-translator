@@ -11,11 +11,25 @@
 
 	The grammar for expressions we parse is:
 
-	expr -> factor rest
-	rest -> + factor rest
-	rest -> - factor rest
-	rest -> e - meaning empty
-	factor -> ( expr ) | num
+	start -> list EOF
+
+	list -> expr ; list | e
+
+	expr -> term moreterms
+
+	moreterms -> + term moreterms
+			  |  - term moreterms
+			  | e
+
+	term -> factor morefactors
+
+	morefactors -> * factor morefactors
+				 | / factor morefactors
+				 | div factor morefactors
+				 | mod factor morefactors
+				 | e
+
+	factor -> ( expr ) | id | num
 
 	We assume that the user will input an expression. Our job
 	is to a) decide if the user input is a correct expression
