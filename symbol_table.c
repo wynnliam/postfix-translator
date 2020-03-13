@@ -26,6 +26,12 @@ int last_char = -1;
 int last_entry = 0;
 
 int lookup(char* lexeme) {
+	int curr_pos;
+	for(curr_pos = last_entry; curr_pos > 0; --curr_pos) {
+		if(strcmp(symbol_table[curr_pos].lexptr, lexeme) == 0)
+			return curr_pos;
+	}
+
 	return 0;
 }
 
