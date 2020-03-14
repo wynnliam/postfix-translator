@@ -269,21 +269,6 @@ void factor() {
 	} else error("Bad factor");
 }
 
-void rest() {
-	if(lookahead == '+') {
-		match('+');
-		factor();
-		putchar('+');
-		rest();
-	} else if(lookahead == '-') {
-		match('-');
-		factor();
-		putchar('-');
-		rest();
-	}
-}
-
-
 void error(const char* message) {
 	printf("ERROR: %s\n", message);
 	exit(1);
