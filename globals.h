@@ -53,6 +53,8 @@ extern struct sym_entry symbol_table[];
 
 /* LEXER DEFINITIONS */
 
+#define LEXBUF_SIZE	128
+
 // The key to predictive parsing. We use this to choose
 // what production rule to follow given the one we are already
 // at. Given how our grammar is structured, we can use this

@@ -89,6 +89,8 @@
 int line_num = 1;
 int tokenval = NONE;
 
+char lexbuf[LEXBUF_SIZE];
+
 // Symbol table functions we use
 extern int lookup(char* lexeme);
 extern int insert(char* lexeme, int token_val);
@@ -141,6 +143,34 @@ int lexan() {
 			// If isdigit(t) == false, we've gone too far, so put t back
 			ungetc(t, stdin);*/
 			return NUM;
+		}
+
+		else if(isalpha(t)) {
+			int sym_table_pos;
+			int buff_pos = 0;
+
+			while(isalnum(t)) {
+				lexbuf[buff_pos] = t;
+				t = getchar();
+				++buff_pos;
+
+				if(buff_pos >= LEXBUF_SIZE)
+					error("compiler error");
+			}
+
+			lexbuf[buff_pos] = EOS;
+			// We are not done with all tokens to read so put
+			// t back.
+			if(t != EOF)
+				ungetc(t, stdin);
+
+			sym_table_pos = lookup(lexbuf);
+
+			if(sym_table_pos == 0)
+				sym_table_pos = insert(lexbuf, ID);
+
+			tokenval = sym_table_pos;
+			return symbol_table[sym_table_pos].token_val;
 		}
 
 		else {
