@@ -104,7 +104,6 @@ void error(const char* message);
 int main() {
 	insert("div", DIV);
 	insert("mod", MOD);
-	insert(0, 0);
 
 	lookahead = lexan();
 	expr();
@@ -127,7 +126,11 @@ int lexan() {
 		}
 
 		else if(isdigit(t)) {
-			tokenval = t - '0'; // Gives numeric value of t
+			// Put t back and read the entire number
+			ungetc(t, stdin);
+			scanf("%d", &tokenval);
+			// I'll keep the old version here for your (and my) edification.
+			/*tokenval = t - '0'; // Gives numeric value of t
 			t = getchar();
 			while(isdigit(t)) {
 				// Adding a new digit means increasing token by a factor of 10
@@ -136,7 +139,7 @@ int lexan() {
 			}
 
 			// If isdigit(t) == false, we've gone too far, so put t back
-			ungetc(t, stdin);
+			ungetc(t, stdin);*/
 			return NUM;
 		}
 
