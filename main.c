@@ -173,6 +173,9 @@ int lexan() {
 			return symbol_table[sym_table_pos].token_val;
 		}
 
+		else if(t == EOF)
+			return DONE;
+
 		else {
 			tokenval = NONE;
 			return t;
