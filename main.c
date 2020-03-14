@@ -107,9 +107,15 @@ int main() {
 	insert("div", DIV);
 	insert("mod", MOD);
 
+	// Essentially this handles the production:
+	// list -> expr ; list | e
 	lookahead = lexan();
-	expr();
-	putchar('\n');
+	while(lookahead != DONE) {
+		expr();
+		putchar('\n');
+		match(';');
+	}
+
 	return 0;
 }
 
@@ -124,7 +130,6 @@ int lexan() {
 			;
 		else if(t == '\n') {
 			line_num += 1;
-			return NONE;
 		}
 
 		else if(isdigit(t)) {
@@ -217,7 +222,10 @@ void factor() {
 	} else if(lookahead == NUM) {
 		printf(" %d ", tokenval);
 		match(NUM);
-	} else error("Bad factor");
+	} else if(lookahead == ID) {
+		printf(" %s ", symbol_table[tokenval].lexptr);
+		match(ID);
+	}else error("Bad factor");
 }
 
 void term() {
