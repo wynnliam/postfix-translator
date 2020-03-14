@@ -200,6 +200,20 @@ void expr() {
 	rest();
 }
 
+void factor() {
+	if(lookahead == '(') {
+		match('(');
+		expr();
+		match(')');
+	} else if(lookahead == NUM) {
+		printf(" %d ", tokenval);
+		match(NUM);
+	} else if(lookahead == ID) {
+		printf(" %s ", symbol_table[tokenval].lexptr);
+		match(ID);
+	} else error("Bad factor");
+}
+
 void rest() {
 	if(lookahead == '+') {
 		match('+');
@@ -214,19 +228,6 @@ void rest() {
 	}
 }
 
-void factor() {
-	if(lookahead == '(') {
-		match('(');
-		expr();
-		match(')');
-	} else if(lookahead == NUM) {
-		printf(" %d ", tokenval);
-		match(NUM);
-	} else if(lookahead == ID) {
-		printf(" %s ", symbol_table[tokenval].lexptr);
-		match(ID);
-	}else error("Bad factor");
-}
 
 void term() {
 	if(isdigit(lookahead)) {
