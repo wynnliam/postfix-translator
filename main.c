@@ -196,8 +196,41 @@ void match(const int token) {
 }
 
 void expr() {
+	int t;
+	term();
+	while(1) {
+		if(lookahead == '+' || lookahead == '-') {
+			t = lookahead;
+			match(lookahead);
+			term();
+			printf(" %c ", (char)t);
+			continue;
+		} else {
+			return;
+		}
+	}
+}
+
+void term() {
+	int t;
 	factor();
-	rest();
+	while(1) {
+		if(lookahead == '*' || lookahead == '/') {
+			t = lookahead;
+			match(lookahead);
+			factor();
+			printf(" %c ", (char)t);
+			continue;
+		} else {
+			return;
+		}
+	}
+	/*if(isdigit(lookahead)) {
+		putchar(lookahead);
+		match(lookahead);
+	} else {
+		error("Bad digit");
+	}*/
 }
 
 void factor() {
@@ -228,15 +261,6 @@ void rest() {
 	}
 }
 
-
-void term() {
-	if(isdigit(lookahead)) {
-		putchar(lookahead);
-		match(lookahead);
-	} else {
-		error("Bad digit");
-	}
-}
 
 void error(const char* message) {
 	printf("ERROR: %s\n", message);
