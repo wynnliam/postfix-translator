@@ -88,16 +88,13 @@
 
 int line_num = 1;
 
+extern void init();
 extern void parse();
-extern int lookup(char* lexeme);
-extern int insert(char* lexeme, int token_val);
 
 void error(const char* message);
 
 int main() {
-	insert("div", DIV);
-	insert("mod", MOD);
-
+	init();
 	parse();
 
 	return 0;
