@@ -91,30 +91,20 @@ int tokenval = NONE;
 
 char lexbuf[LEXBUF_SIZE];
 
+extern void parse();
 // Symbol table functions we use
 extern int lookup(char* lexeme);
 extern int insert(char* lexeme, int token_val);
 
 int lexan();
 void match(const int token);
-void expr();
-void rest();
-void factor();
-void term();
 void error(const char* message);
 
 int main() {
 	insert("div", DIV);
 	insert("mod", MOD);
 
-	// Essentially this handles the production:
-	// list -> expr ; list | e
-	lookahead = lexan();
-	while(lookahead != DONE) {
-		expr();
-		putchar('\n');
-		match(';');
-	}
+	parse();
 
 	return 0;
 }
@@ -195,79 +185,6 @@ void match(const int token) {
 		error("Bad token");
 }
 
-/*
-	Implements the expr and moreterm production rules:
-
-	expr -> term moreterms
-	moreterms -> + term moreterms
-			  |  - term moreterms
-			  | e
-*/
-void expr() {
-	int t;
-	term();
-	while(1) {
-		if(lookahead == '+' || lookahead == '-') {
-			t = lookahead;
-			match(lookahead);
-			term();
-			printf(" %c ", (char)t);
-			continue;
-		} else {
-			return;
-		}
-	}
-}
-
-/*
-	Implements the term and morefactors production rules:
-
-	term -> factor morefactors
-	morefactors -> * factor morefactors
-				 | / factor morefactors
-				 | div factor morefactors
-				 | mod factor morefactors
-				 | e
-*/
-void term() {
-	int t;
-	factor();
-	while(1) {
-		if(lookahead == '*' || lookahead == '/') {
-			t = lookahead;
-			match(lookahead);
-			factor();
-			printf(" %c ", (char)t);
-			continue;
-		} else {
-			return;
-		}
-	}
-	/*if(isdigit(lookahead)) {
-		putchar(lookahead);
-		match(lookahead);
-	} else {
-		error("Bad digit");
-	}*/
-}
-
-/*
-	Implements the factor production rule:
-	factor -> ( expr ) | id | num
-*/
-void factor() {
-	if(lookahead == '(') {
-		match('(');
-		expr();
-		match(')');
-	} else if(lookahead == NUM) {
-		printf(" %d ", tokenval);
-		match(NUM);
-	} else if(lookahead == ID) {
-		printf(" %s ", symbol_table[tokenval].lexptr);
-		match(ID);
-	} else error("Bad factor");
-}
 
 void error(const char* message) {
 	printf("ERROR: %s\n", message);
