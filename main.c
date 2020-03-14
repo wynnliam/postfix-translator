@@ -86,12 +86,9 @@
 
 #include "./globals.h"
 
-int line_num = 1;
 
 extern void init();
 extern void parse();
-
-void error(const char* message);
 
 int main() {
 	init();
@@ -100,7 +97,3 @@ int main() {
 	return 0;
 }
 
-void error(const char* message) {
-	printf("ERROR: %s\n", message);
-	exit(1);
-}
