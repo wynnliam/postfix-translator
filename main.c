@@ -15,7 +15,7 @@
 
 	list -> stmt ; list | e
 
-	stmt -> expr
+	stmt -> id := expr
 
 	expr -> term moreterms
 
