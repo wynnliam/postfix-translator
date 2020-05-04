@@ -68,3 +68,8 @@ int lookahead;
 // the offender.
 extern int line_num;
 extern void error(const char* message);
+
+
+/* EMIT - PRINTING OUTPUT */
+// Prints a token's value (tval) according to its type (t).
+extern void emit(int t, int tval);
