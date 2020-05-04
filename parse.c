@@ -7,19 +7,32 @@ extern void match(const int token);
 extern void error(const char* message);
 
 void parse();
+void stmt();
 void expr();
 void term();
 void factor();
 
 void parse() {
 	// Essentially this handles the production:
-	// list -> expr ; list | e
+	// list -> stmt ; list | e
 	lookahead = lexan();
 	while(lookahead != DONE) {
-		expr();
+		stmt();
 		putchar('\n');
 		match(';');
 	}
+}
+
+/*
+	Implements rule:
+	stmt -> expr
+
+	At the moment, stmt doesn't do much. However,
+	we are setting it up to handle a more rich variety
+	of real statements.
+*/
+void stmt() {
+	expr();
 }
 
 /*
