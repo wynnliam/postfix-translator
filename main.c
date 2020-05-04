@@ -82,6 +82,18 @@
 	You would get an infinite loop!
 
 	As such, we remove these problems from our grammar.
+
+	TODO: We want to extend this system to support a grammar of this type:
+	stmt -> id := expr
+		 |  if expr then stmt
+		 |  while expr do stmt
+		 |  begin opt_stmts end
+
+	opt_stmts -> stmt_list | e
+	stmt_list -> stmt_list ; stmt | stmt
+
+	TODO: We want to add a stack machine to produce an intermediate representation
+	of our language.
 */
 
 #include "./globals.h"
