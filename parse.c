@@ -92,7 +92,8 @@ void factor() {
 		emit(NUM, tokenval);
 		match(NUM);
 	} else if(lookahead == ID) {
-		printf(" %s ", symbol_table[tokenval].lexptr);
+		//printf(" %s ", symbol_table[tokenval].lexptr);
+		emit(ID, tokenval);
 		match(ID);
 	} else error("Bad factor");
 }
