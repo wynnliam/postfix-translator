@@ -13,7 +13,9 @@
 
 	start -> list EOF
 
-	list -> expr ; list | e
+	list -> stmt ; list | e
+
+	stmt -> expr
 
 	expr -> term moreterms
 
