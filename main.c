@@ -94,6 +94,8 @@
 
 	TODO: We want to add a stack machine to produce an intermediate representation
 	of our language.
+
+	TODO: Write an emitter to abstract out print statements!
 */
 
 #include "./globals.h"
