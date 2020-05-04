@@ -38,7 +38,7 @@ void expr() {
 			t = lookahead;
 			match(lookahead);
 			term();
-			printf(" %c ", (char)t);
+			emit(t, NONE);
 			continue;
 		} else {
 			return;
@@ -88,7 +88,8 @@ void factor() {
 		expr();
 		match(')');
 	} else if(lookahead == NUM) {
-		printf(" %d ", tokenval);
+		//printf(" %d ", tokenval);
+		emit(NUM, tokenval);
 		match(NUM);
 	} else if(lookahead == ID) {
 		printf(" %s ", symbol_table[tokenval].lexptr);

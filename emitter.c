@@ -6,7 +6,11 @@
 void emit(int t, int tval) {
 	switch(t) {
 		case '+': case '-': case '*': case '/':
-			printf("%c\n", t);
+			printf("%c ", t);
+			break;
+		case NUM:
+			printf("%d ", tval);
+			break;
 		default:
 			printf("token %d, tokenval: %d\n", t, tval);
 	}
