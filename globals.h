@@ -19,10 +19,11 @@
 #define NONE	-1
 #define EOS		0
 #define NUM 	256
-#define DIV		257
-#define MOD		258
-#define ID		259
-#define DONE	260
+#define DIV		NUM + 1
+#define MOD		DIV + 1
+#define ID		MOD + 1
+#define DONE	ID + 1
+#define ASSIGN	DONE + 1
 
 // The number value of the current token. For
 // a token we read in, this tells us the type in a way
