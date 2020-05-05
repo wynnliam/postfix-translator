@@ -7,6 +7,7 @@ extern void match(const int token);
 extern void error(const char* message);
 
 void parse();
+void stmt_list();
 void stmt();
 void opt_stmt();
 void expr();
@@ -17,11 +18,20 @@ void parse() {
 	// Essentially this handles the production:
 	// list -> stmt ; list | e
 	lookahead = lexan();
-	while(lookahead != DONE) {
+	stmt_list();
+	/*while(lookahead != DONE) {
 		stmt();
 		putchar('\n');
 		match(';');
-	}
+	}*/
+}
+
+void stmt_list() {
+	do {
+		stmt();
+		putchar('\n');
+		match(';');
+	} while(lookahead != DONE && lookahead != END);
 }
 
 /*
@@ -78,11 +88,8 @@ void stmt() {
 	Otherwise we are forced to have a semi-colon after an end
 */
 void opt_stmt() {
-	while(lookahead != END) {
-		stmt();
-		putchar('\n');
-		match(';');
-	}
+	if(lookahead != END)
+		stmt_list();
 }
 
 /*

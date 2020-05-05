@@ -6,3 +6,7 @@ if a then
     a := 4;
     b := (c * e) - (d * 4);
   end;
+
+c := 3 + 4;
+while c do
+  c := c - 1;
