@@ -27,6 +27,7 @@ void parse() {
 	Implements rule:
 	stmt -> id := expr
 		  | if expr then stmt
+		  | while expr do stmt
 
 	At the moment, stmt doesn't do much. However,
 	we are setting it up to handle a more rich variety
@@ -45,6 +46,11 @@ void stmt() {
 		match(THENSTMT); // Match the then.
 		stmt(); // Parse the branch true statement.
 		// TODO: Be able to emit label.
+	} else if(lookahead == WHILESTMT) {
+		match(WHILESTMT);
+		expr();
+		match(DOSTMT);
+		stmt();
 	}
 }
 
