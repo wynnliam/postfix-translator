@@ -18,6 +18,9 @@
 	stmt -> id := expr
 		  | if expr then stmt
 		  | while expr do stmt
+		  | begin opt_stmt end
+
+	opt_stmt -> list | e
 
 	expr -> term moreterms
 
