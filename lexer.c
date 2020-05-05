@@ -71,6 +71,15 @@ int lexan() {
 			return symbol_table[sym_table_pos].token_val;
 		}
 
+		else if(t == ':') {
+			t = getchar();
+
+			if(t == '=') {
+				return ASSIGN;
+			} else
+				error("bad token");
+		}
+
 		else if(t == EOF)
 			return DONE;
 

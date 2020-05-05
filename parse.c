@@ -25,14 +25,19 @@ void parse() {
 
 /*
 	Implements rule:
-	stmt -> expr
+	stmt -> id := expr
 
 	At the moment, stmt doesn't do much. However,
 	we are setting it up to handle a more rich variety
 	of real statements.
 */
 void stmt() {
-	expr();
+	if(lookahead == ID) {
+		match(ID); // Checks lookahead is an ID then reads next token.
+		match(ASSIGN); // Checks lookahead is an assignment token then does read.
+		printf(":= "); // TODO: Use emit!
+		expr(); // Now read an expression.
+	}
 }
 
 /*
