@@ -9,4 +9,6 @@ void init() {
 	insert("mod", MOD);
 	insert("if", IFSTMT);
 	insert("then", THENSTMT);
+	insert("while", WHILESTMT);
+	insert("do", DOSTMT);
 }
