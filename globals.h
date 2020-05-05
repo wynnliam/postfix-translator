@@ -28,6 +28,8 @@
 #define THENSTMT	IFSTMT + 1
 #define WHILESTMT	THENSTMT + 1
 #define DOSTMT		WHILESTMT + 1
+#define BEGIN		DOSTMT + 1
+#define END			BEGIN + 1
 
 // The number value of the current token. For
 // a token we read in, this tells us the type in a way
