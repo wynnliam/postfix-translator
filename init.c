@@ -11,4 +11,6 @@ void init() {
 	insert("then", THENSTMT);
 	insert("while", WHILESTMT);
 	insert("do", DOSTMT);
+	insert("begin", BEGIN);
+	insert("end", END);
 }
