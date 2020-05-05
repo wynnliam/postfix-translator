@@ -16,6 +16,7 @@
 	list -> stmt ; list | e
 
 	stmt -> id := expr
+		  | if expr then stmt
 
 	expr -> term moreterms
 
