@@ -17,6 +17,9 @@ void emit(int t, int tval) {
 		case ASSIGN:
 			printf("lvalue %s ", symbol_table[tval].lexptr);
 			break;
+		case IFSTMT:
+			printf("gofalse label ");
+			break;
 		default:
 			printf("token %d, tokenval: %d\n", t, tval);
 	}

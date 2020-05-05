@@ -26,6 +26,7 @@ void parse() {
 /*
 	Implements rule:
 	stmt -> id := expr
+		  | if expr then stmt
 
 	At the moment, stmt doesn't do much. However,
 	we are setting it up to handle a more rich variety
@@ -37,6 +38,13 @@ void stmt() {
 		match(ID); // Checks lookahead is an ID then reads next token.
 		match(ASSIGN); // Checks lookahead is an assignment token then does read.
 		expr(); // Now read an expression.
+	} else if(lookahead == IFSTMT) {
+		match(IFSTMT);
+		expr(); // We want to evaluate the test expression
+		emit(IFSTMT, NONE); // Then we want a gofalse if the expression is 0
+		match(THENSTMT); // Match the then.
+		stmt(); // Parse the branch true statement.
+		// TODO: Be able to emit label.
 	}
 }
 
