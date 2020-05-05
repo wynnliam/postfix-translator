@@ -16,14 +16,16 @@
 // values that a char cannot have with the exception
 // of EOS, which in ASCII is 0 and universally means 
 // "end of string".
-#define NONE	-1
-#define EOS		0
-#define NUM 	256
-#define DIV		NUM + 1
-#define MOD		DIV + 1
-#define ID		MOD + 1
-#define DONE	ID + 1
-#define ASSIGN	DONE + 1
+#define NONE		-1
+#define EOS			0
+#define NUM 		256
+#define DIV			NUM + 1
+#define MOD			DIV + 1
+#define ID			MOD + 1
+#define DONE		ID + 1
+#define ASSIGN		DONE + 1
+#define IFSTMT		ASSIGN + 1
+#define THENSTMT	IFSTMT + 1
 
 // The number value of the current token. For
 // a token we read in, this tells us the type in a way
