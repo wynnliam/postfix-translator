@@ -17,6 +17,7 @@
 
 	stmt -> id := expr
 		  | if expr then stmt
+		  | while expr do stmt
 
 	expr -> term moreterms
 
