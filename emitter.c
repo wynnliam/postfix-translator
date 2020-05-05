@@ -14,6 +14,9 @@ void emit(int t, int tval) {
 		case ID:
 			printf("%s ", symbol_table[tval].lexptr);
 			break;
+		case ASSIGN:
+			printf("lvalue %s ", symbol_table[tval].lexptr);
+			break;
 		default:
 			printf("token %d, tokenval: %d\n", t, tval);
 	}
