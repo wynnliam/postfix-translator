@@ -8,6 +8,7 @@ extern void error(const char* message);
 
 void parse();
 void stmt();
+void opt_stmt();
 void expr();
 void term();
 void factor();
@@ -28,6 +29,7 @@ void parse() {
 	stmt -> id := expr
 		  | if expr then stmt
 		  | while expr do stmt
+		  | begin opt_stmt end
 
 	At the moment, stmt doesn't do much. However,
 	we are setting it up to handle a more rich variety
@@ -57,6 +59,29 @@ void stmt() {
 		stmt();
 		// TODO: emit goto
 		// TODO: emit label
+	} else if(lookahead == BEGIN) {
+		match(BEGIN);
+		opt_stmt();
+		match(END);
+	}
+}
+
+/*
+	Implements :
+	opt_stmt -> list | e
+
+	TODO: Rewrite grammar so we have
+	stmt_list -> stmt_list ; stmt | stmt
+	AND
+	opt_list -> stmt_list | e
+
+	Otherwise we are forced to have a semi-colon after an end
+*/
+void opt_stmt() {
+	while(lookahead != END) {
+		stmt();
+		putchar('\n');
+		match(';');
 	}
 }
 
