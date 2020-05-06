@@ -82,4 +82,5 @@ extern void error(const char* message);
 extern void emit(int t, int tval);
 
 extern void emit_label(int label);
+extern void emit_goto(int label);
 extern void emit_gotofalse(int label);

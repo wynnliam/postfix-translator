@@ -66,15 +66,17 @@ void stmt() {
 		stmt(); // Parse the branch true statement.
 		emit_label(out);
 	} else if(lookahead == WHILESTMT) {
-		// TODO: Be able to emit label.
+		int test = newlabel();
+		int out = newlabel();
+		emit_label(test);
 		match(WHILESTMT);
 		expr();
-		// TODO: emit gofalse
-		emit(IFSTMT, NONE);
+		emit_gotofalse(out);
 		match(DOSTMT);
 		stmt();
 		// TODO: emit goto
-		// TODO: emit label
+		emit_goto(test);
+		emit_label(out);
 	} else if(lookahead == BEGIN) {
 		match(BEGIN);
 		opt_stmt();

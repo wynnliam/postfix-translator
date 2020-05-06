@@ -1,12 +1,2 @@
-a := 3;
-b := 5;
-
-if a then
-  begin
-    a := 4;
-    b := (c * e) - (d * 4);
-  end;
-
-c := 3 + 4;
 while c do
-  c := c - 1;
+  c := c + 1;
