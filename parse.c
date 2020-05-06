@@ -6,6 +6,12 @@ extern int lexan();
 extern void match(const int token);
 extern void error(const char* message);
 
+// A cheap way to keep track of labels. Everytime
+// we generate a label, we return this value then increment.
+static int lbl_count = 0;
+
+int newlabel();
+
 void parse();
 void stmt_list();
 void stmt();
@@ -166,4 +172,8 @@ void factor() {
 		emit(ID, tokenval);
 		match(ID);
 	} else error("Bad factor");
+}
+
+int newlabel() {
+	return lbl_count++;
 }
