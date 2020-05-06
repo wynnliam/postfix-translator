@@ -60,11 +60,11 @@ void stmt() {
 	} else if(lookahead == IFSTMT) {
 		match(IFSTMT);
 		expr(); // We want to evaluate the test expression
-		// TODO: emit gofalse
-		emit(IFSTMT, NONE); // Then we want a gofalse if the expression is 0
+		int out = newlabel(); // We want the gofalse if the expression evaluates to 0.
+		emit_gotofalse(out);
 		match(THENSTMT); // Match the then.
 		stmt(); // Parse the branch true statement.
-		// TODO: Be able to emit label.
+		emit_label(out);
 	} else if(lookahead == WHILESTMT) {
 		// TODO: Be able to emit label.
 		match(WHILESTMT);
