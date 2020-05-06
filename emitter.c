@@ -24,3 +24,11 @@ void emit(int t, int tval) {
 			printf("token %d, tokenval: %d\n", t, tval);
 	}
 }
+
+extern void emit_label(int label) {
+	printf("label_%d ", label);
+}
+
+extern void emit_gotofalse(int label) {
+	printf("gofalse label_%d ", label);
+}
