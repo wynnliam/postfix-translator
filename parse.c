@@ -74,7 +74,6 @@ void stmt() {
 		emit_gotofalse(out);
 		match(DOSTMT);
 		stmt();
-		// TODO: emit goto
 		emit_goto(test);
 		emit_label(out);
 	} else if(lookahead == BEGIN) {
