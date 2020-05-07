@@ -53,7 +53,8 @@ void stmt_list() {
 */
 void stmt() {
 	if(lookahead == ID) {
-		emit(ASSIGN, tokenval); // tokenval now set to index to id in symbol table.
+		//emit(ASSIGN, tokenval); // tokenval now set to index to id in symbol table.
+		emit_lvalue(tokenval);
 		match(ID); // Checks lookahead is an ID then reads next token.
 		match(ASSIGN); // Checks lookahead is an assignment token then does read.
 		expr(); // Now read an expression.

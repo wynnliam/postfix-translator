@@ -83,6 +83,7 @@ extern void emit(int t, int tval);
 
 extern void emit_push(int val);
 extern void emit_rvalue(int tval);
+extern void emit_lvalue(int tval);
 
 extern void emit_label(int label);
 extern void emit_goto(int label);

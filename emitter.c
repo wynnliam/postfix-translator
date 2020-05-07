@@ -33,6 +33,10 @@ void emit_rvalue(int tval) {
 	printf("rvalue %s\n", symbol_table[tval].lexptr);
 }
 
+void emit_lvalue(int tval) {
+	printf("lvalue %s\n", symbol_table[tval].lexptr);
+}
+
 void emit_label(int label) {
 	printf("label_%d\n", label);
 }
