@@ -81,6 +81,9 @@ extern void error(const char* message);
 // Prints a token's value (tval) according to its type (t).
 extern void emit(int t, int tval);
 
+extern void emit_push(int val);
+extern void emit_rvalue(int tval);
+
 extern void emit_label(int label);
 extern void emit_goto(int label);
 extern void emit_gotofalse(int label);

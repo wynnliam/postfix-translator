@@ -25,14 +25,22 @@ void emit(int t, int tval) {
 	}
 }
 
-extern void emit_label(int label) {
+void emit_push(int val) {
+	printf("push %d\n", val);
+}
+
+void emit_rvalue(int tval) {
+	printf("rvalue %s\n", symbol_table[tval].lexptr);
+}
+
+void emit_label(int label) {
 	printf("label_%d\n", label);
 }
 
-extern void emit_goto(int label) {
+void emit_goto(int label) {
 	printf("goto label_%d\n", label);
 }
 
-extern void emit_gotofalse(int label) {
+void emit_gotofalse(int label) {
 	printf("gofalse label_%d\n", label);
 }

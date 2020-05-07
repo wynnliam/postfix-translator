@@ -141,7 +141,7 @@ void term() {
 			t = lookahead;
 			match(lookahead);
 			factor();
-			printf(" %c ", (char)t);
+			emit(t, NONE);
 			continue;
 		} else {
 			return;
@@ -166,11 +166,13 @@ void factor() {
 		match(')');
 	} else if(lookahead == NUM) {
 		//printf(" %d ", tokenval);
-		emit(NUM, tokenval);
+		//emit(NUM, tokenval);
+		emit_push(tokenval);
 		match(NUM);
 	} else if(lookahead == ID) {
 		//printf(" %s ", symbol_table[tokenval].lexptr);
-		emit(ID, tokenval);
+		//emit(ID, tokenval);
+		emit_rvalue(tokenval);
 		match(ID);
 	} else error("Bad factor");
 }
