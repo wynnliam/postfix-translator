@@ -37,6 +37,10 @@ void emit_lvalue(int tval) {
 	printf("lvalue %s\n", symbol_table[tval].lexptr);
 }
 
+extern void emit_assign() {
+	printf(":=\n");
+}
+
 void emit_label(int label) {
 	printf("label_%d\n", label);
 }

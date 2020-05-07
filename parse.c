@@ -58,6 +58,7 @@ void stmt() {
 		match(ID); // Checks lookahead is an ID then reads next token.
 		match(ASSIGN); // Checks lookahead is an assignment token then does read.
 		expr(); // Now read an expression.
+		emit_assign();
 	} else if(lookahead == IFSTMT) {
 		match(IFSTMT);
 		expr(); // We want to evaluate the test expression
