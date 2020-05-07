@@ -117,7 +117,7 @@ void expr() {
 			t = lookahead;
 			match(lookahead);
 			term();
-			emit(t, NONE);
+			emit_operator(t);
 			continue;
 		} else {
 			return;
@@ -143,7 +143,7 @@ void term() {
 			t = lookahead;
 			match(lookahead);
 			factor();
-			emit(t, NONE);
+			emit_operator(lookahead);
 			continue;
 		} else {
 			return;
