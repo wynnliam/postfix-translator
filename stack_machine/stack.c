@@ -8,7 +8,7 @@
 static size_t stack[STACK_MEMORY];
 static size_t head = 0;
 
-extern void push(const size_t val) {
+void push(const size_t val) {
 	if(head >= STACK_MEMORY)
 		error("Out of memory");
 
@@ -16,3 +16,12 @@ extern void push(const size_t val) {
 	head++;
 }
 
+size_t pop() {
+	if(head == 0)
+		error("Nothing to pop");
+
+	head--;
+	size_t val = stack[head];
+
+	return val;
+}

@@ -6,3 +6,5 @@
 	Pushes val to the top of the stack.
 */
 extern void push(const size_t val);
+
+extern size_t pop();

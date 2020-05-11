@@ -13,6 +13,10 @@ int main() {
 	printf("Welcome to the stack!\n");
 
 	push(1);
+	push(2);
+	size_t v = pop();
+
+	printf("%d\n", v);
 
 	return 0;
 }
