@@ -12,9 +12,9 @@
 int main() {
 	printf("Welcome to the stack!\n");
 
-	push(1);
 	push(2);
-	add();
+	push(1);
+	subtract();
 
 	return 0;
 }

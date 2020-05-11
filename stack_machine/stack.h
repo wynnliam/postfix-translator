@@ -12,5 +12,5 @@ extern size_t pop();
 extern void copy();
 
 /* MATH OPERATIONS */
-
 extern void add();
+extern void subtract();

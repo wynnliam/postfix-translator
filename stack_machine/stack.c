@@ -43,3 +43,12 @@ void add() {
 	size_t b = pop();
 	push(a + b);
 }
+
+void subtract() {
+	if(next < 2)
+		error("Need two values for subtraction");
+
+	size_t a = pop();
+	size_t b = pop();
+	push(b - a);
+}
