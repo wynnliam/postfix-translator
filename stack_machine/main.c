@@ -13,8 +13,8 @@ int main() {
 	printf("Welcome to the stack!\n");
 
 	push(2);
-	push(1);
-	subtract();
+	push(0);
+	divide();
 
 	return 0;
 }

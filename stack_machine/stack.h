@@ -14,3 +14,5 @@ extern void copy();
 /* MATH OPERATIONS */
 extern void add();
 extern void subtract();
+extern void multiply();
+extern void divide();

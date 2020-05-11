@@ -52,3 +52,25 @@ void subtract() {
 	size_t b = pop();
 	push(b - a);
 }
+
+void multiply() {
+	if(next < 2)
+		error("Need two values for multiplication");
+
+	size_t a = pop();
+	size_t b = pop();
+	push(a * b);
+}
+
+void divide() {
+	if(next < 2)
+		error("Need two values for division");
+
+	size_t a = pop();
+	size_t b = pop();
+
+	if(a == 0)
+		error("Trying to divide by zero");
+
+	push(b / a);
+}
