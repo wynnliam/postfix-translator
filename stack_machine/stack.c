@@ -34,3 +34,12 @@ void copy() {
 	size_t val = stack[next - 1];
 	push(val);
 }
+
+void add() {
+	if(next < 2)
+		error("Need two values for addition");
+
+	size_t a = pop();
+	size_t b = pop();
+	push(a + b);
+}

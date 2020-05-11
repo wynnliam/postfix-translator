@@ -14,7 +14,7 @@ int main() {
 
 	push(1);
 	push(2);
-	copy();
+	add();
 
 	return 0;
 }
