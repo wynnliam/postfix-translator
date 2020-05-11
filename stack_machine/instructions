@@ -1,0 +1,20 @@
+Arithmetic:
++
+-
+/
+*
+
+Stack Manipulation:
+push v -- Pushes v onto stack
+rvalue l -- pushes contents of l onto stack
+lvalue l -- pushes address of l onto stack
+pop -- throw away top value onto the stack
+:= -- r value on top placed in l value below it and both are popped
+copy -- pushes a copy of top value onto stack.
+
+Control Flow:
+label l -- target of jumps to l; has no other effect.
+goto l -- next instruction is taken from statement with label l
+gofalse l -- pop top value; jump if it is zero
+gotrue l -- pop top value; jump if not zero.
+halt -- stop all execution
