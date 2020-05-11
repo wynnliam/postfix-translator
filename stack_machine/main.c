@@ -14,9 +14,7 @@ int main() {
 
 	push(1);
 	push(2);
-	size_t v = pop();
-
-	printf("%d\n", v);
+	copy();
 
 	return 0;
 }

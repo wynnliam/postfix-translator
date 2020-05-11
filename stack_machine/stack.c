@@ -6,22 +6,31 @@
 #define STACK_MEMORY	1000
 
 static size_t stack[STACK_MEMORY];
-static size_t head = 0;
+// The index we will add our next value to.
+static size_t next = 0;
 
 void push(const size_t val) {
-	if(head >= STACK_MEMORY)
+	if(next >= STACK_MEMORY)
 		error("Out of memory");
 
-	stack[head] = val;
-	head++;
+	stack[next] = val;
+	next++;
 }
 
 size_t pop() {
-	if(head == 0)
+	if(next == 0)
 		error("Nothing to pop");
 
-	head--;
-	size_t val = stack[head];
+	next--;
+	size_t val = stack[next];
 
 	return val;
+}
+
+void copy() {
+	if(next == 0)
+		error("Nothing to copy");
+
+	size_t val = stack[next - 1];
+	push(val);
 }
