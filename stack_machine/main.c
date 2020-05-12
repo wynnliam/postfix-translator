@@ -13,11 +13,10 @@
 int main() {
 	printf("Welcome to the stack!\n");
 
-	push(1);
-	push(2);
-	copy();
 	lvalue("a");
 	push(2);
+	push(3);
+	add();
 	assignment();
 
 	var_cleanup();
