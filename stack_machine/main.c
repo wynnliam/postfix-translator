@@ -19,6 +19,7 @@ int main() {
 	add();
 	assignment();
 
+	print_variables();
 	var_cleanup();
 
 	return 0;

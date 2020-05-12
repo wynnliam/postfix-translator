@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #define MAX_VARS	1000
 
@@ -69,6 +70,17 @@ void assignment() {
 	size_t lval = pop();
 
 	*((size_t*)lval) = rval;
+}
+
+void print_variables() {
+	printf("\n--- VARIABLES ---\n");
+
+	size_t i;
+	for(i = 0; i < num_vars; i++) {
+		printf("%s	%d\n", variables[i].identifier, values[i]);
+	}
+
+	printf("-----------------\n");
 }
 
 void var_cleanup() {

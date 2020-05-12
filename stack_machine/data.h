@@ -4,8 +4,6 @@
 	Pushes the address of var onto the stack.
 	Side note: if var is not found, then we add
 	it to our data list.
-
-	TODO: Free variables!
 */
 extern void lvalue(const char* var);
 
@@ -19,6 +17,11 @@ extern void rvalue(const char* var);
 	rvalue on top placed in lvalue below it and both are popped
 */
 extern void assignment();
+
+/*
+	Iterates through each variable and prints its value.
+*/
+extern void print_variables();
 
 /*
 	Frees all allocated variables
