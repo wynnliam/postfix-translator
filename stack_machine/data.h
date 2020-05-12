@@ -16,6 +16,11 @@ extern void lvalue(const char* var);
 extern void rvalue(const char* var);
 
 /*
+	rvalue on top placed in lvalue below it and both are popped
+*/
+extern void assignment();
+
+/*
 	Frees all allocated variables
 */
 extern void var_cleanup();

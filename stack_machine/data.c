@@ -64,6 +64,13 @@ void rvalue(const char* var) {
 		error("Cannot push variable that doesn't exist");
 }
 
+void assignment() {
+	size_t rval = pop();
+	size_t lval = pop();
+
+	*((size_t*)lval) = rval;
+}
+
 void var_cleanup() {
 	size_t i;
 	for(i = 0; i < num_vars; i++) {
