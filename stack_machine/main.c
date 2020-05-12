@@ -17,6 +17,7 @@ int main() {
 	push(2);
 	copy();
 	lvalue("a");
+	rvalue("a");
 
 	var_cleanup();
 

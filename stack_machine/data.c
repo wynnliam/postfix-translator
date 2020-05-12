@@ -48,6 +48,22 @@ void lvalue(const char* var) {
 	push((size_t)variables[i].address);
 }
 
+void rvalue(const char* var) {
+	if(!var)
+		error("Bad variable name");
+
+	size_t i;
+	for(i = 0; i < num_vars; i++) {
+		if(strcmp(var, variables[i].identifier) == 0) {
+			push(*(variables[i].address));
+			break;
+		}
+	}
+
+	if(i == num_vars)
+		error("Cannot push variable that doesn't exist");
+}
+
 void var_cleanup() {
 	size_t i;
 	for(i = 0; i < num_vars; i++) {
