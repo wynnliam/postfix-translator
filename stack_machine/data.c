@@ -41,7 +41,17 @@ void lvalue(const char* var) {
 
 		// Set the address to the next available spot
 		variables[i].address = &values[i];
+
+		num_vars++;
 	}
 
 	push((size_t)variables[i].address);
+}
+
+void var_cleanup() {
+	size_t i;
+	for(i = 0; i < num_vars; i++) {
+		free(variables[i].identifier);
+		variables[i].identifier = NULL;
+	}
 }

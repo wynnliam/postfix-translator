@@ -6,3 +6,8 @@
 	it to our data list.
 */
 extern void lvalue(const char* var);
+
+/*
+	Frees all allocated variables
+*/
+extern void var_cleanup();
