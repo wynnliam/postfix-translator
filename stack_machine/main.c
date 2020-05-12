@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include "./stack.h"
+#include "./data.h"
 
 int main() {
 	printf("Welcome to the stack!\n");
@@ -15,6 +16,7 @@ int main() {
 	push(1);
 	push(2);
 	copy();
+	lvalue("a");
 
 	return 0;
 }
