@@ -40,7 +40,9 @@ void add_instruction(const size_t type, const size_t arg) {
 
 	program[num_instructions].type = type;
 
-	if(type == INST_LVAL || type == INST_RVAL) {
+	if(type == INST_LVAL || type == INST_RVAL ||
+	   type == INST_LABEL || type == INST_GOTO ||
+	   type == INST_GOTRUE || type == INST_GOFALSE) {
 		program[num_instructions].arg.identifier = (char*)arg;
 	} else {
 		program[num_instructions].arg.val = arg;
