@@ -14,6 +14,7 @@
 int main() {
 	printf("Welcome to the stack!\n");
 
+	add_label("m");
 	add_instruction(INST_LVAL, (size_t)"a");
 	add_instruction(INST_PUSH, 2);
 	add_instruction(INST_PUSH, 3);

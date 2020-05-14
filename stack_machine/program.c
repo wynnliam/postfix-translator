@@ -6,6 +6,9 @@
 #include "./data.h"
 #include "./error.h"
 
+#include <string.h>
+#include <stdlib.h>
+
 #define MAX_INSTRUCTIONS	1000
 
 struct instruction {
@@ -47,10 +50,8 @@ void add_instruction(const size_t type, const size_t arg) {
 }
 
 void execute_program() {
-	size_t i = 0;
-
-	for(i = 0; i < num_instructions; i++) {
-		switch(program[i].type) {
+	for(pc = 0; pc < num_instructions; pc++) {
+		switch(program[pc].type) {
 			case INST_ADD:
 				add();
 				break;
@@ -65,7 +66,7 @@ void execute_program() {
 				break;
 
 			case INST_PUSH:
-				push(program[i].arg.val);
+				push(program[pc].arg.val);
 				break;
 			case INST_POP:
 				pop(); // TODO: Cannot save value
@@ -75,10 +76,10 @@ void execute_program() {
 				break;
 
 			case INST_RVAL:
-				rvalue(program[i].arg.identifier);
+				rvalue(program[pc].arg.identifier);
 				break;
 			case INST_LVAL:
-				lvalue(program[i].arg.identifier);
+				lvalue(program[pc].arg.identifier);
 				break;
 			case INST_ASSIGN:
 				assignment();
@@ -94,5 +95,10 @@ void add_label(const char* id) {
 	if(num_labels >= MAX_INSTRUCTIONS)
 		error("Out of label memory");
 
-	// TODO: Finish me!
+	labels[num_labels].instaddr = pc;
+
+	labels[num_labels].id = (char*)malloc(strlen(id) + 1);
+	strcpy(labels[num_labels].id, id);
+
+	num_labels++;
 }
