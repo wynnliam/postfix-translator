@@ -16,6 +16,11 @@ struct instruction {
 	} arg;
 };
 
+struct label {
+	char* id;
+	size_t instaddr;
+};
+
 static struct instruction program[MAX_INSTRUCTIONS];
 static int num_instructions = 0;
 
