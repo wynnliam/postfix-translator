@@ -89,3 +89,10 @@ void execute_program() {
 		}
 	}
 }
+
+void add_label(const char* id) {
+	if(num_labels >= MAX_INSTRUCTIONS)
+		error("Out of label memory");
+
+	// TODO: Finish me!
+}
