@@ -24,6 +24,8 @@ struct label {
 	size_t instaddr;
 };
 
+static size_t address_from_label(const char* label);
+
 static struct instruction program[MAX_INSTRUCTIONS];
 static int num_instructions = 0;
 
@@ -40,8 +42,14 @@ void add_instruction(const size_t type, const size_t arg) {
 
 	program[num_instructions].type = type;
 
+	// Labels aren't really instructions, but have the same
+	// syntax. So we want to keep track of the address when
+	// we add this instruction.
+	if(type == INST_LABEL)
+		add_label((char*)arg);
+
 	if(type == INST_LVAL || type == INST_RVAL ||
-	   type == INST_LABEL || type == INST_GOTO ||
+	   INST_LABEL || type == INST_GOTO ||
 	   type == INST_GOTRUE || type == INST_GOFALSE) {
 		program[num_instructions].arg.identifier = (char*)arg;
 	} else {
@@ -52,7 +60,9 @@ void add_instruction(const size_t type, const size_t arg) {
 }
 
 void execute_program() {
-	for(pc = 0; pc < num_instructions; pc++) {
+	size_t jaddr;
+
+	while(pc < num_instructions) {
 		switch(program[pc].type) {
 			case INST_ADD:
 				add();
@@ -87,9 +97,19 @@ void execute_program() {
 				assignment();
 				break;
 
+			// They don't do anything
+			case INST_LABEL:
+				break;
+			case INST_GOTO:
+				jaddr = address_from_label(program[pc].arg.identifier);
+				pc = jaddr + 1;
+				continue;
+
 			default:
 				error("Bad instruction");
 		}
+
+		pc++;
 	}
 }
 
@@ -98,10 +118,20 @@ void add_label(const char* id) {
 	if(num_labels >= MAX_INSTRUCTIONS)
 		error("Out of label memory");
 
-	labels[num_labels].instaddr = pc;
+	labels[num_labels].instaddr = num_instructions;
 
 	labels[num_labels].id = (char*)malloc(strlen(id) + 1);
 	strcpy(labels[num_labels].id, id);
 
 	num_labels++;
+}
+
+size_t address_from_label(const char* label) {
+	size_t i;
+	for(i = 0; i < num_labels; i++) {
+		if(strcmp(label, labels[i].id) == 0)
+			return labels[i].instaddr;
+	}
+
+	error("Bad label");
 }

@@ -14,11 +14,28 @@
 int main() {
 	printf("Welcome to the stack!\n");
 
+	/*add_instruction(INST_LABEL, (size_t)"lel");
 	add_instruction(INST_LVAL, (size_t)"a");
 	add_instruction(INST_PUSH, 2);
 	add_instruction(INST_PUSH, 3);
+	add_instruction(INST_LABEL, (size_t)"kek");
 	add_instruction(INST_ADD, 0);
 	add_instruction(INST_ASSIGN, 0);
+	add_instruction(INST_GOTO, (size_t)"lel");*/
+	add_instruction(INST_GOTO, (size_t)"start");
+	add_instruction(INST_LABEL, (size_t)"inc");
+	add_instruction(INST_LVAL, (size_t)"a");
+	add_instruction(INST_RVAL, (size_t)"a");
+	add_instruction(INST_PUSH, 2);
+	add_instruction(INST_ADD, 0);
+	add_instruction(INST_ASSIGN, 0);
+	add_instruction(INST_GOTO, (size_t)"done");
+	add_instruction(INST_LABEL, (size_t)"start");
+	add_instruction(INST_LVAL, (size_t)"a");
+	add_instruction(INST_PUSH, 0);
+	add_instruction(INST_ASSIGN, 0);
+	add_instruction(INST_GOTO, (size_t)"inc");
+	add_instruction(INST_LABEL, (size_t)"done");
 
 	execute_program();
 
