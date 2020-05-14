@@ -24,6 +24,9 @@ struct label {
 static struct instruction program[MAX_INSTRUCTIONS];
 static int num_instructions = 0;
 
+static struct label labels[MAX_INSTRUCTIONS];
+static int num_labels = 0;
+
 // Program counter - keeps track of the current instruction we
 // are on. Needed for control flow instructions.
 static int pc = 0;
