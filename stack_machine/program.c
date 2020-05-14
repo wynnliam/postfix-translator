@@ -61,6 +61,7 @@ void add_instruction(const size_t type, const size_t arg) {
 
 void execute_program() {
 	size_t jaddr;
+	size_t val;
 
 	while(pc < num_instructions) {
 		switch(program[pc].type) {
@@ -104,6 +105,25 @@ void execute_program() {
 				jaddr = address_from_label(program[pc].arg.identifier);
 				pc = jaddr + 1;
 				continue;
+			case INST_GOFALSE:
+				jaddr = address_from_label(program[pc].arg.identifier);
+				val = pop();
+				if(val == 0) {
+					pc = jaddr + 1;
+					continue;
+				}
+				break;
+			case INST_GOTRUE:
+				jaddr = address_from_label(program[pc].arg.identifier);
+				val = pop();
+				if(val) {
+					pc = jaddr + 1;
+					continue;
+				}
+				break;
+
+			case INST_HALT:
+				return;
 
 			default:
 				error("Bad instruction");

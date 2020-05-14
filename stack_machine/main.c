@@ -23,19 +23,33 @@ int main() {
 	add_instruction(INST_ASSIGN, 0);
 	add_instruction(INST_GOTO, (size_t)"lel");*/
 	add_instruction(INST_GOTO, (size_t)"start");
+
 	add_instruction(INST_LABEL, (size_t)"inc");
 	add_instruction(INST_LVAL, (size_t)"a");
 	add_instruction(INST_RVAL, (size_t)"a");
-	add_instruction(INST_PUSH, 2);
+	add_instruction(INST_PUSH, 1);
 	add_instruction(INST_ADD, 0);
 	add_instruction(INST_ASSIGN, 0);
-	add_instruction(INST_GOTO, (size_t)"done");
+	add_instruction(INST_GOTO, (size_t)"test");
+
 	add_instruction(INST_LABEL, (size_t)"start");
 	add_instruction(INST_LVAL, (size_t)"a");
 	add_instruction(INST_PUSH, 0);
 	add_instruction(INST_ASSIGN, 0);
+
+	add_instruction(INST_LABEL, (size_t)"test");
+	add_instruction(INST_PUSH, 10);
+	add_instruction(INST_RVAL, (size_t)"a");
+	add_instruction(INST_SUBTRACT, 0);
+	add_instruction(INST_GOFALSE, (size_t)"done");
 	add_instruction(INST_GOTO, (size_t)"inc");
+
 	add_instruction(INST_LABEL, (size_t)"done");
+	add_instruction(INST_LVAL, (size_t)"b");
+	add_instruction(INST_RVAL, (size_t)"a");
+	add_instruction(INST_PUSH, 3);
+	add_instruction(INST_ADD, 0);
+	add_instruction(INST_ASSIGN, 0);
 
 	execute_program();
 
