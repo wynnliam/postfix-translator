@@ -15,3 +15,4 @@
 
 
 extern void add_instruction(const size_t type, const size_t arg);
+extern void execute_program();

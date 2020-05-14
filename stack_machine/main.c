@@ -20,7 +20,10 @@ int main() {
 	add_instruction(INST_ADD, 0);
 	add_instruction(INST_ASSIGN, 0);
 
-	// TODO: Execute
+	execute_program();
+
+	print_variables();
+	var_cleanup();
 
 	/*lvalue("a");
 	push(2);

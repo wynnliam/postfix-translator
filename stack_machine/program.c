@@ -2,6 +2,8 @@
 
 #include "./program.h"
 
+#include "./stack.h"
+#include "./data.h"
 #include "./error.h"
 
 #define MAX_INSTRUCTIONS	1000
@@ -34,4 +36,48 @@ void add_instruction(const size_t type, const size_t arg) {
 	}
 
 	num_instructions++;
+}
+
+void execute_program() {
+	size_t i = 0;
+
+	for(i = 0; i < num_instructions; i++) {
+		switch(program[i].type) {
+			case INST_ADD:
+				add();
+				break;
+			case INST_SUBTRACT:
+				subtract();
+				break;
+			case INST_DIVIDE:
+				divide();
+				break;
+			case INST_MULT:
+				multiply();
+				break;
+
+			case INST_PUSH:
+				push(program[i].arg.val);
+				break;
+			case INST_POP:
+				pop(); // TODO: Cannot save value
+				break;
+			case INST_COPY:
+				copy();
+				break;
+
+			case INST_RVAL:
+				rvalue(program[i].arg.identifier);
+				break;
+			case INST_LVAL:
+				lvalue(program[i].arg.identifier);
+				break;
+			case INST_ASSIGN:
+				assignment();
+				break;
+
+			default:
+				error("Bad instruction");
+		}
+	}
 }
