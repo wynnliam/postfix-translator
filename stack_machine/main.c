@@ -7,20 +7,29 @@
 */
 
 #include <stdio.h>
+#include "./program.h"
 #include "./stack.h"
 #include "./data.h"
 
 int main() {
 	printf("Welcome to the stack!\n");
 
-	lvalue("a");
+	add_instruction(INST_LVAL, (size_t)"a");
+	add_instruction(INST_PUSH, 2);
+	add_instruction(INST_PUSH, 3);
+	add_instruction(INST_ADD, 0);
+	add_instruction(INST_ASSIGN, 0);
+
+	// TODO: Execute
+
+	/*lvalue("a");
 	push(2);
 	push(3);
 	add();
 	assignment();
 
 	print_variables();
-	var_cleanup();
+	var_cleanup();*/
 
 	return 0;
 }

@@ -13,11 +13,5 @@
 #define INST_LVAL		INST_RVAL + 1
 #define INST_ASSIGN		INST_LVAL + 1
 
-struct instruction {
-	size_t type;
-	union {
-		size_t val;
-		char* identifier;
-	} arg;
-};
 
+extern void add_instruction(const size_t type, const size_t arg);
