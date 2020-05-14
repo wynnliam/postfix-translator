@@ -91,6 +91,7 @@ void execute_program() {
 	}
 }
 
+// TODO: Free memory.
 void add_label(const char* id) {
 	if(num_labels >= MAX_INSTRUCTIONS)
 		error("Out of label memory");
