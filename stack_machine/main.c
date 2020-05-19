@@ -8,25 +8,107 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
 #include "./program.h"
 #include "./stack.h"
 #include "./data.h"
+#include "./error.h"
 
-static char command[100];
-static char arg[100];
+static size_t command = INST_NONE;
+static char buffer[100];
 
-void read() {
-	scanf("%s %s", command, arg);
+int read() {
+	while(1) {
+		int t = getchar();
 
-	while(getchar() != '\n');
+		if(t == ' ' || t == '\t' || t == '\n');
+
+		else if(t == '+') {
+			add_instruction(INST_ADD, 0);
+			return 1;
+		} else if(t == '-') {
+			add_instruction(INST_SUBTRACT, 0);
+			return 1;
+		} else if(t == '*') {
+			add_instruction(INST_MULT, 0);
+			return 1;
+		} else if(t == '/') {
+			add_instruction(INST_DIVIDE, 0);
+			return 1;
+		} else if(t == ':') {
+			t = getchar();
+			if(t == '=') {
+				add_instruction(INST_ASSIGN, 0);
+				return 1;
+			} else {
+				error("Bad command");
+			}
+		} else if(isalnum(t)) {
+			// Read the command
+			int bindex = 0;
+			do {
+				buffer[bindex] = t;
+				bindex++;
+				t = getchar();
+			} while(isalnum(t));
+
+			ungetc(t, stdin);
+			buffer[bindex] = '\0';
+
+			// Treat as command
+			if(command == INST_NONE) {
+				if(strcmp(buffer, "push") == 0)
+					command = INST_PUSH;
+				else if(strcmp(buffer, "pop") == 0)
+					command = INST_POP;
+				else if(strcmp(buffer, "copy") == 0)
+					command = INST_COPY;
+				else if(strcmp(buffer, "rvalue") == 0)
+					command = INST_RVAL;
+				else if(strcmp(buffer, "lvalue") == 0)
+					command = INST_LVAL;
+				else
+					error("Bad command");
+			} else {
+				char* argcopy = (char*)malloc(strlen(buffer) + 1);
+				strcpy(argcopy, buffer);
+
+				// Treat as argument.
+				size_t argnum = atoi(argcopy);
+				size_t arg;
+
+				if(command == INST_PUSH) {
+					arg = argnum;
+					free(argcopy);
+				} else {
+					arg = (size_t)argcopy;
+				}
+
+				add_instruction(command, arg);
+
+				command = INST_NONE;
+			}
+
+		} else if(t == EOF) {
+			return 0;
+		} else {
+			error("Bad command");
+		}
+
+		return 1;
+	}
 }
 
 int main() {
 	printf("Welcome to the stack!\n");
 
-	while(1) {
-		read();
-	}
+	while(read() != 0);
+
+	execute_program();
+
+	print_variables();
+	var_cleanup();
 
 	/*add_instruction(INST_LVAL, (size_t)"a");
 	add_instruction(INST_PUSH, 2);

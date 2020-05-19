@@ -1,0 +1,3 @@
+lvalue a
+push 3
+:=
