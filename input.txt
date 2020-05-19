@@ -1,6 +1,0 @@
-begin
-  a := 3;
-  b := a + 2;
-  if b then
-    b := 2;
-end;
