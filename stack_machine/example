@@ -1,3 +1,27 @@
+goto start
+
+label inc
 lvalue a
+rvalue a
+push 1
+:=
+goto test
+
+label start
+lvalue a
+push 0
+:=
+
+label test
+push 10
+rvalue a
+-
+gofalse done
+goto inc
+
+label done
+lvalue b
+rvalue a
 push 3
++
 :=

@@ -14,7 +14,6 @@
 #define INST_RVAL		INST_COPY + 1
 #define INST_LVAL		INST_RVAL + 1
 #define INST_ASSIGN		INST_LVAL + 1
-#define INST_NONE		INST_ASSIGN + 1
 
 #define INST_LABEL		INST_ASSIGN + 1
 #define INST_GOTO		INST_LABEL + 1
@@ -22,6 +21,7 @@
 #define INST_GOTRUE		INST_GOFALSE + 1
 #define INST_HALT		INST_GOTRUE + 1
 
+#define INST_NONE		INST_HALT + 1
 
 extern void add_instruction(const size_t type, const size_t arg);
 extern void execute_program();
