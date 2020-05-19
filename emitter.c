@@ -46,7 +46,7 @@ void emit_operator(int op) {
 }
 
 void emit_label(int label) {
-	printf("label_%d\n", label);
+	printf("label label_%d\n", label);
 }
 
 void emit_goto(int label) {

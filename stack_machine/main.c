@@ -44,14 +44,14 @@ int read() {
 			} else {
 				error("Bad command");
 			}
-		} else if(isalnum(t)) {
+		} else if(isalnum(t) || t == '_') {
 			// Read the command
 			int bindex = 0;
 			do {
 				buffer[bindex] = t;
 				bindex++;
 				t = getchar();
-			} while(isalnum(t));
+			} while(isalnum(t) || t == '_');
 
 			ungetc(t, stdin);
 			buffer[bindex] = '\0';

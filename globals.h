@@ -66,7 +66,7 @@ extern struct sym_entry symbol_table[];
 // what production rule to follow given the one we are already
 // at. Given how our grammar is structured, we can use this
 // to always correctly choose the next production rule.
-int lookahead;
+extern int lookahead;
 
 
 /* ERROR HANDLING DEFITIONS */

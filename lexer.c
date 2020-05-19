@@ -7,6 +7,7 @@ extern int lookup(char* lexeme);
 extern int insert(char* lexeme, int token_val);
 
 int tokenval = NONE;
+int lookahead = NONE;
 char lexbuf[LEXBUF_SIZE];
 
 int lexan();
