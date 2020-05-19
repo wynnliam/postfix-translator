@@ -12,34 +12,13 @@
 #include "./stack.h"
 #include "./data.h"
 
+static char command[100];
+static char arg[100];
+
 void read() {
-	char command_buffer[1000];
-	int cbufferpos = 0;
-	char t;
+	scanf("%s %s", command, arg);
 
-	while(1) {
-		t = getchar();
-
-		// White space
-		if(t == ' ' || t == '\t' || t == '\n') continue;
-
-		// Reading in a command
-		else if(isalpha(t)) {
-			do {
-				command_buffer[cbufferpos] = t;
-				cbufferpos++;
-				t = getchar();
-			} while(isalpha(t));
-
-			command_buffer[cbufferpos] = '\0';
-			printf("%s\n", command_buffer);
-
-			ungetc(t, stdin);
-
-			return;
-			
-		}
-	}
+	while(getchar() != '\n');
 }
 
 int main() {
