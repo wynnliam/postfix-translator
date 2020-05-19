@@ -4,6 +4,7 @@ label inc
 lvalue a
 rvalue a
 push 1
++
 :=
 goto test
 
@@ -20,8 +21,4 @@ gofalse done
 goto inc
 
 label done
-lvalue b
-rvalue a
-push 3
-+
-:=
+halt
