@@ -143,7 +143,7 @@ void term() {
 			t = lookahead;
 			match(lookahead);
 			factor();
-			emit_operator(lookahead);
+			emit_operator(t);
 			continue;
 		} else {
 			return;
