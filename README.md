@@ -138,3 +138,88 @@ you can implement recurisve descent parsing.
 ### Why is it called "Postfix Translator Language"?
 Originally, the extent of this project was to "Use recusrive descent parsing to translate infix notation expressions to postfix notation." This is still a part of the language, as we translate infix expressions (`a + b`) to postfix (`a b +`). But
 it was extended to have more statement types, as well as a stack machine for a back end to actually compute the code.
+
+## What is Stack Machine Code?
+This is the back end code. It is ran on a stack machine, which is a virtual machine that executes commands on a stack
+structure. Here is a summary of all instructions that can be executed:
+
+```
+Arithmetic:
+Each of these pops the top two values off the top of the stack, does
+the operation, and puts the result back on the stack.
++
+-
+/
+*
+ 
+Stack Manipulation:
+push v -- Pushes v onto stack
+rvalue l -- pushes contents of l onto stack
+lvalue l -- pushes address of l onto stack
+pop -- throw away top value onto the stack
+:= -- r value on top placed in l value below it and both are popped
+copy -- pushes a copy of top value onto stack.
+ 
+Control Flow:
+label l -- target of jumps to l; has no other effect.
+goto l -- next instruction is taken from statement with label l
+gofalse l -- pop top value; jump if it is zero
+gotrue l -- pop top value; jump if not zero.
+halt -- stop all execution
+```
+
+Basically this is like a simple version of some kind of assembly language.
+
+## Example program
+Suppose you had the following Postfix program:
+
+```
+a := 4;
+b := 0;
+while a do
+  begin
+    a := a - 1;
+    b := b + a;
+  end;
+;
+```
+
+Running the Postfix Compiler would give you the following Stack Machine Code:
+```
+lvalue a
+push 4
+:=
+
+lvalue b
+push 0
+:=
+
+label label_0
+rvalue a
+gofalse label_1
+lvalue a
+rvalue a
+push 1
+-
+:=
+
+lvalue b
+rvalue b
+rvalue a
++
+:=
+
+goto label_0
+label label_1
+```
+
+When you execute this code on the stack machine, you get:
+```
+Welcome to the stack!
+
+--- VARIABLES ---
+a	0
+b	6
+-----------------
+```
+```
