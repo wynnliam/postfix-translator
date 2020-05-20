@@ -105,6 +105,36 @@ An infinite loop!
 So in sum, your grammar cannot be ambigious, nor have "left recursion" in it. If you can do away with those two, then
 you can implement recurisve descent parsing.
 
+### Grammar for Postfix Translator Language
+```
+    start -> list EOF
+  
+      list -> stmt ; list | e
+  
+      stmt -> id := expr
+            | if expr then stmt
+            | while expr do stmt
+            | begin opt_stmt end
+  
+      opt_stmt -> list | e
+  
+      expr -> term moreterms
+  
+      moreterms -> + term moreterms
+                |  - term moreterms
+                | e
+  
+      term -> factor morefactors
+  
+      morefactors -> * factor morefactors
+                   | / factor morefactors
+                   | div factor morefactors
+                   | mod factor morefactors
+                   | e
+   
+      factor -> ( expr ) | id | num
+```
+
 ### Why is it called "Postfix Translator Language"?
 Originally, the extent of this project was to "Use recusrive descent parsing to translate infix notation expressions to postfix notation." This is still a part of the language, as we translate infix expressions (`a + b`) to postfix (`a b +`). But
 it was extended to have more statement types, as well as a stack machine for a back end to actually compute the code.
